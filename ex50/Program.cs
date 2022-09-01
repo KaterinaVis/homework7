@@ -6,47 +6,59 @@
 // 8 4 2 4
 // 1 7 -> такого числа в массиве нет
 
-Console.WriteLine("Введите x");
+Console.WriteLine("Введите m");
 int m = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Введите y");
+Console.WriteLine("Введите n");
 int n = Convert.ToInt32(Console.ReadLine());
 
-int [,] matrix = new int[5,8];
+int[,] matrix = new int[3, 4];
 
-verifyElement(matrix, x, y);
+FillMatrix(matrix);
+PrintArray(matrix);
+Console.WriteLine("");
+verifyElement(matrix, m, n);
 
-void verifyElement(int [,] matrix, int x, int y)
+void FillMatrix(int[,] matr) // метод для рандомного заполнения
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-      for(int j=0; j < matrix.GetLength(1); j++)
-      {
-      if (matrix[i,j] == matrix [x,y])
+        for (int j = 0; j < matr.GetLength(1); j++)
         {
-        Console.WriteLine(matrix [i,j]);
-        }
-       else
-        {
-        Console.WriteLine("Такого элемента в массиве нет");
-        }
+            matr[i, j] = new Random().Next(1, 10);
         }
     }
 }
 
 
-
-int[,] FillMatrix(int rowsCount, int columsCount, int leftRange, int rightRange)
+void PrintArray(int[,] matr) // метод для печати
 {
-    int[,] matrix = new int[rowsCount, columsCount];
-    Random rand = new Random();
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-      for(int j=0; j < matrix.GetLength(1); j++)
-      {
-        matrix[i,j] = rand.Next(leftRange, rightRange+1);
-      }
+        for (int j = 0; j < matr.GetLength(1); j++)
+        {
+            Console.Write($"{matr[i, j]} ");
+        }
+        Console.WriteLine();
     }
-    return matrix;
 }
+
+
+void verifyElement(int[,] matr, int row, int col) //метод для сравниания индексов
+{
+    for (int i = 0; i < matr.GetLength(0); i++)
+    {
+        for (int j = 0; j < matr.GetLength(1); j++)
+        {
+            if (i == row && j == col)
+            {
+                Console.WriteLine($"Искомый элемент: {matrix[i, j]}");
+            }
+        }
+    }
+     if (row > matr.GetLength(0) || col > matr.GetLength(1))
+            {
+                Console.WriteLine("Такого элемента нет");
+            }
+}
+
