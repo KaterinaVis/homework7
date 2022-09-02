@@ -44,7 +44,7 @@ for (int i = 0; i < array.GetLength(0); i++)
   double A = 0;
   for (int j = 0; j < array.GetLength(1); j++)
   {
-    A += Convert.ToDouble(array[j, i]);
+    A += (double)array[j, i];
   }
     Console.WriteLine($"Cреднее арифметическое столбца № {i+1} {A}");
 }
