@@ -6,12 +6,12 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,7; 5,7; 3,7; 3.
 
-//  Console.Write("Введите m: ");
-// int m = Convert.ToInt32(Console.ReadLine());
-// Console.Write("Введите n: ");
-// int n = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите m: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите n: ");
+int n = Convert.ToInt32(Console.ReadLine());
 
-int[,] array = new int[4, 3];
+int[,] array = new int[m, n];
 
 FillMatrix(array);
 void FillMatrix(int[,] matr) // метод для рандомного заполнения
@@ -38,13 +38,16 @@ void PrintArray(int[,] matr) // метод для печати
     }
 }
 
-// Console.Write($"\nCреднее арифметическое:\n");  //среднее арифметическое
-for (int i = 0; i < array.GetLength(0); i++)
+ 
+for (int i = 0; i < n; i++) //среднее арифметическое
 {
   double A = 0;
-  for (int j = 0; j < array.GetLength(1); j++)
+ 
+  for (int j = 0; j < m; j++)
   {
-    A += (double)array[j, i];
+    A += (double) array[j, i];
+   
   }
+  A = Math.Round((double)A/m, 1);
     Console.WriteLine($"Cреднее арифметическое столбца № {i+1} {A}");
 }
