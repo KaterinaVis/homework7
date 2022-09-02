@@ -6,82 +6,45 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,7; 5,7; 3,7; 3.
 
- Console.Write("Введите m: ");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите n: ");
-int n = Convert.ToInt32(Console.ReadLine());
+//  Console.Write("Введите m: ");
+// int m = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите n: ");
+// int n = Convert.ToInt32(Console.ReadLine());
 
-Console.Clear();
-Console.WriteLine($"m = {m}, n = {n}.");
+int[,] array = new int[4, 3];
 
-double[,] array = new double[m, n];
-
-CreateArrayDouble(array);
-
-WriteArray(array);
-
-Console.WriteLine();
-
-void CreateArrayDouble(double[,] array)
+FillMatrix(array);
+void FillMatrix(int[,] matr) // метод для рандомного заполнения
 {
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < n; j++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-      array[i, j] = new Random().NextDouble() * 20 - 10;
+        for (int j = 0; j < matr.GetLength(1); j++)
+        {
+            matr[i, j] = new Random().Next(1, 10);
+        }
     }
-  }
 }
 
-void WriteArray (double[,] array){
-for (int i = 0; i < m; i++)
-  {
-      for (int j = 0; j < n; j++)
-      {
-        double alignNumber = Math.Round(array[i, j], 1);
-        Console.Write(alignNumber + " ");
-      }
-      Console.WriteLine();
-  }
-}
-
-int[,] arrayWhole = new int[m, n];
-arrayWhole = TransformationArrayWhole(array);
-
-WriteArrayInt(arrayWhole);
-
-Console.Write($"\nCреднее арифметическое:\n");
-for (int i = 0; i < n; i++)
+PrintArray(array);
+void PrintArray(int[,] matr) // метод для печати
 {
-  double arithmeticMean = 0;
-  for (int j = 0; j < m; j++)
-  {
-    arithmeticMean += arrayWhole[j, i];
-  }
-  arithmeticMean = Math.Round(arithmeticMean / m, 1);
-  Console.WriteLine($"столбца № {i+1} {arithmeticMean}");
-}
-
-int[,] TransformationArrayWhole (double[,] array)
-{
-  int[,] arrayWhole = new int[array.GetLength(0), array.GetLength(1)];
-  for (int i = 0; i < array.GetLength(0); i++)
-  {
-    for (int j = 0; j < array.GetLength(1); j++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-      arrayWhole[i, j] = Convert.ToInt32(array[i, j]);
+        for (int j = 0; j < matr.GetLength(1); j++)
+        {
+            Console.Write($"{matr[i, j]} ");
+        }
+        Console.WriteLine();
     }
-  }
-  return arrayWhole;
 }
 
-void WriteArrayInt (int[,] arrayWhole){
-for (int i = 0; i < m; i++)
+// Console.Write($"\nCреднее арифметическое:\n");  //среднее арифметическое
+for (int i = 0; i < array.GetLength(0); i++)
+{
+  double A = 0;
+  for (int j = 0; j < array.GetLength(1); j++)
   {
-      for (int j = 0; j < n; j++)
-      {
-        Console.Write(arrayWhole[i, j] + " ");
-      }
-      Console.WriteLine();
+    A += Convert.ToDouble(array[j, i]);
   }
+    Console.WriteLine($"Cреднее арифметическое столбца № {i+1} {A}");
 }
